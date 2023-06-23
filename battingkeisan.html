@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>宝石の得点計算</title>
+  <script>
+    function calculateScore(player) {
+      // 入力値の取得
+      var redCount = parseInt(document.getElementById("redCount_" + player).value);
+      var yellowCount = parseInt(document.getElementById("yellowCount_" + player).value);
+      var blueCount = parseInt(document.getElementById("blueCount_" + player).value);
+      var whiteCount = parseInt(document.getElementById("whiteCount_" + player).value);
+      
+      // 得点の計算
+      var redScore = redCount * 3;
+      var yellowScore = yellowCount * 2;
+      var blueScore = blueCount;
+      var whiteScore = Math.pow(whiteCount, 2);
+      var setCount = Math.min(redCount, yellowCount, blueCount);
+      var setScore = setCount * 4;
+      
+      var totalScore = redScore + yellowScore + blueScore + whiteScore + setScore;
+      
+      // 結果の表示
+      var scoreResult = document.getElementById("scoreResult_" + player);
+      if (scoreResult) {
+        scoreResult.textContent = "得点: " + totalScore;
+      }
+      
+      return totalScore;
+    }
+    
+    function calculateTotalScores() {
+      var player1Score = calculateScore('player1');
+      var player2Score = calculateScore('player2');
+      var player3Score = calculateScore('player3');
+      
+      // 合計点の比較
+      var maxScore = Math.max(player1Score, player2Score, player3Score);
+      
+      var winner = "";
+      if (maxScore === player1Score) {
+        winner = "プレイヤー1";
+      } else if (maxScore === player2Score) {
+        winner = "プレイヤー2";
+      } else if (maxScore === player3Score) {
+        winner = "プレイヤー3";
+      }
+      
+      // 勝者の表示
+      var winnerElement = document.getElementById("winner");
+      if (winnerElement) {
+        winnerElement.textContent = "勝者: " + winner;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>宝石の得点計算</h1>
+  
+  <div id="player1">
+    <h2>プレイヤー1</h2>
+    <form>
+      <label for="redCount_player1">赤の宝石の数:</label>
+      <input type="number" id="redCount_player1" min="0" value="0"><br>
+      
+      <label for="yellowCount_player1">黄色の宝石の数:</label>
+      <input type="number" id="yellowCount_player1" min="0" value="0"><br>
+      
+      <label for="blueCount_player1">青の宝石の数:</label>
+      <input type="number" id="blueCount_player1" min="0" value="0"><br>
+      
+      <label for="whiteCount_player1">白の宝石の数:</label>
+      <input type="number" id="whiteCount_player1" min="0" value="0"><br>
+    </form>
+    <button type="button" onclick="calculateScore('player1')">計算</button>
+    <div id="scoreResult_player1"></div>
+  </div>
+  
+  <div id="player2">
+    <h2>プレイヤー2</h2>
+    <form>
+      <label for="redCount_player2">赤の宝石の数:</label>
+      <input type="number" id="redCount_player2" min="0" value="0"><br>
+      
+      <label for="yellowCount_player2">黄色の宝石の数:</label>
+      <input type="number" id="yellowCount_player2" min="0" value="0"><br>
+      
+      <label for="blueCount_player2">青の宝石の数:</label>
+      <input type="number" id="blueCount_player2" min="0" value="0"><br>
+      
+      <label for="whiteCount_player2">白の宝石の数:</label>
+      <input type="number" id="whiteCount_player2" min="0" value="0"><br>
+    </form>
+    <button type="button" onclick="calculateScore('player2')">計算</button>
+    <div id="scoreResult_player2"></div>
+  </div>
+  
+  <div id="player3">
+    <h2>プレイヤー3</h2>
+    <form>
+      <label for="redCount_player3">赤の宝石の数:</label>
+      <input type="number" id="redCount_player3" min="0" value="0"><br>
+      
+      <label for="yellowCount_player3">黄色の宝石の数:</label>
+      <input type="number" id="yellowCount_player3" min="0" value="0"><br>
+      
+      <label for="blueCount_player3">青の宝石の数:</label>
+      <input type="number" id="blueCount_player3" min="0" value="0"><br>
+      
+      <label for="whiteCount_player3">白の宝石の数:</label>
+      <input type="number" id="whiteCount_player3" min="0" value="0"><br>
+    </form>
+    <button type="button" onclick="calculateScore('player3')">計算</button>
+    <div id="scoreResult_player3"></div>
+  </div>
+  
+  <button type="button" onclick="calculateTotalScores()">合計点計算</button>
+  <div id="winner"></div>
+</body>
+</html>
